@@ -35,6 +35,11 @@ public:
 
 int main()
 {
+    // auto gl = std::make_shared<Glyph>('A');
+    // gl->draw(6,8);
+    // gl->draw(3,7);
+
+    //-------------------------------------------
     GlyphFactory gf;
 
     gf.poolsSize();
