@@ -1,0 +1,6 @@
+Rule of Five
+    Destructor
+    copy ctor -> deep copy
+    move ctor
+    copy assignment  -> deep copy
+    move assignment
