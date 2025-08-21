@@ -1,1 +1,24 @@
 # Cpp-Practise
+
+
+C++(11/14/17) interview questions:
+
+==> Types of constructors.
+==> Rule of five/zero
+==> Shalllow copy and deep copy (Prototype design pattern in C++).
+==> Smart pointers.
+==> RAII.
+==> Thread basic.
+==> Template basic.
+==> S.O.L.I.D. Principles.
+==> Design Patterns
+                Creational (flexible ways to create objects)
+                        Singleton, Factory, Abstract factory, Prototype
+                
+                Structural (defining relationships between objects)
+                        Adaptor, Proxy, Decorator
+
+                Behavioral (how objects send messages to each other)
+                        Chain of responsibility, Observer, Iterator, State
+   
+
