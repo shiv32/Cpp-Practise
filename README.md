@@ -14,9 +14,9 @@ C++(11/14/17) interview questions:
 
                 Creational (flexible ways to create objects)
                         Singleton, Factory, Abstract factory, Prototype
-                Structural (defining relationships between objects)\
-                        Adaptor, Proxy, Decorator\
-                Behavioral (how objects send messages to each other)\
-                        Chain of responsibility, Observer, Iterator, State\
+                Structural (defining relationships between objects)
+                        Adaptor, Proxy, Decorator
+                Behavioral (how objects send messages to each other)
+                        Chain of responsibility, Observer, Iterator, State
    
 
