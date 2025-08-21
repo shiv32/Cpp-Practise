@@ -10,7 +10,8 @@ C++(11/14/17) interview questions:
 ==> Thread basic.\
 ==> Template basic.\
 ==> S.O.L.I.D. Principles.\
-==> Design Patterns\
+==> Design Patterns
+
                 Creational (flexible ways to create objects)\
                         Singleton, Factory, Abstract factory, Prototype\
                 Structural (defining relationships between objects)\
