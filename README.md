@@ -11,7 +11,7 @@ C++(11/14/17) interview questions:
 ==> Template basic.\
 ==> S.O.L.I.D. Principles.\
 ==> Design Patterns\
-                Creational (flexible ways to create objects)\
+                \tCreational (flexible ways to create objects)\
                         Singleton, Factory, Abstract factory, Prototype\
                 Structural (defining relationships between objects)\
                         Adaptor, Proxy, Decorator\
