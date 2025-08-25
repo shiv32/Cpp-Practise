@@ -1,58 +1,72 @@
 #include <iostream>
 #include <memory>
 
-class Image
+class DrawingApi
 {
 public:
-    virtual void display() = 0;
-    virtual ~Image() = default;
+    virtual void drawCircle(int x, int y, int r) = 0;
+    virtual ~DrawingApi() = default;
 };
 
-class RealImage final : public Image
+class DrawingApi1 final : public DrawingApi
 {
-private:
-    std::string filename{};
-
 public:
-    RealImage(std::string flname) : filename(std::move(flname))
+    void drawCircle(int x, int y, int r) override
     {
-        std::clog << "Loading " << filename << std::endl;
-    }
-
-    void display() override
-    {
-        std::clog << "Display " << filename << std::endl;
+        std::clog << "Api1.cirlce at (" << x << "," << y << ") " << "radius : " << r << std::endl;
     }
 };
 
-class ProxyImage final : Image
+class DrawingApi2 final : public DrawingApi
 {
-private:
-    std::string filename{};
-    std::unique_ptr<RealImage> ri;
+public:
+    void drawCircle(int x, int y, int r) override
+    {
+        std::clog << "Api2.cirlce at (" << x << "," << y << ") " << "radius : " << r << std::endl;
+    }
+};
+
+// Bridge
+class Shape
+{
+protected:
+    std::unique_ptr<DrawingApi> dapi;
 
 public:
-    ProxyImage(std::string flname) : filename(std::move(flname)) {};
+    Shape(std::unique_ptr<DrawingApi> da) : dapi(std::move(da)) {}
+    virtual void draw() = 0;
+    virtual ~Shape() = default;
+};
 
-    void display() override
+class DrawCircle final : public Shape
+{
+    int x, y, r;
+
+public:
+    DrawCircle(int _x, int _y, int _r, std::unique_ptr<DrawingApi> da)
+        : Shape(std::move(da)),
+          x(_x),
+          y(_y),
+          r(_r)
     {
-        if (!ri)
-            ri = std::make_unique<RealImage>(filename);
+    }
 
-        ri->display();
+    void draw() override
+    {
+        dapi->drawCircle(x, y, r);
     }
 };
 
 int main()
 {
+    auto da1 = std::make_unique<DrawingApi1>();
+    auto da2 = std::make_unique<DrawingApi2>();
 
-    RealImage ri("shiv.png");
-    ri.display();
-    ri.display();
+    auto dc1 = std::make_unique<DrawCircle>(2, 5, 3, std::move(da1));
+    auto dc2 = std::make_unique<DrawCircle>(8, 4, 9, std::move(da2));
 
-    ProxyImage pi("shiv2.png");
-    pi.display(); // load
-    pi.display(); // cache
+    dc1->draw();
+    dc2->draw();
 
     return 0;
 }
