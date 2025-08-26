@@ -195,6 +195,7 @@ int main()
     // 4. ISP
     std::clog << "4. ISP" << "\n";
     Print(std::move(std::make_unique<SimplePrinter>()));
+    // Scan(std::move(std::make_unique<SimplePrinter>())); //compile error
     Print(std::move(std::make_unique<SmartPrinter>()));
     Scan(std::move(std::make_unique<SmartPrinter>()));
 
