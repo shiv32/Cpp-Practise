@@ -2,6 +2,7 @@
 #include <vector>
 #include <memory>
 
+//-------------------------------------------------------------------
 /*
 1. Single responsibility principle
 */
@@ -33,7 +34,7 @@ public:
         data->print();
     }
 };
-
+//----------------------------------------------------------------
 /*
 2. Open close principle
 */
@@ -85,7 +86,7 @@ double totalArea(const std::vector<std::unique_ptr<Shape>> &shape)
 
     return sum;
 }
-
+//-----------------------------------------------------------------
 /*
 3. LSP- liskov substituion principle
 */
@@ -119,6 +120,7 @@ void BirdFly(std::unique_ptr<Bird> bird)
     bird->fly();
 }
 
+//--------------------------------------------------------
 /*
   4. Interface segregation principle
 */
@@ -142,34 +144,35 @@ public:
     void print() override { std::clog << "SimplePrinter printing" << "\n"; }
 };
 
-class SmartPrinter : public IPrinter, IScanner
+class SmartPrinter : public IPrinter, public IScanner
 {
 public:
     void scan() override { std::clog << "SmartPrinter scanning" << "\n"; }
     void print() override { std::clog << "SmartPrinter printing" << "\n"; }
 };
 
-// void Print(std::unique_ptr<IPrinter> printer)
-// {
-//     printer->print();
-// }
-
-// void Scan(std::unique_ptr<IScanner> scanner)
-// {
-//     scanner->scan();
-// }
-
-template <typename T>
-void Print(std::unique_ptr<T> printer)
+void Print(std::unique_ptr<IPrinter> printer)
 {
     printer->print();
 }
 
-template <typename T>
-void Scan(std::unique_ptr<T> scanner)
+void Scan(std::unique_ptr<IScanner> scanner)
 {
     scanner->scan();
 }
+
+// template <typename T>
+// void Print(std::unique_ptr<T> printer)
+// {
+//     printer->print();
+// }
+
+// template <typename T>
+// void Scan(std::unique_ptr<T> scanner)
+// {
+//     scanner->scan();
+// }
+//---------------------------------------------------------
 
 int main()
 {
