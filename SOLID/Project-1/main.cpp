@@ -174,6 +174,47 @@ void Scan(std::unique_ptr<IScanner> scanner)
 // }
 //---------------------------------------------------------
 
+/*
+    5. DIP - Dependency inversion principle
+*/
+
+class IMessageSender
+{
+public:
+    virtual void send(std::string_view msg) = 0;
+    virtual ~IMessageSender() = default;
+};
+
+class Email : public IMessageSender
+{
+public:
+    void send(std::string_view msg) override
+    {
+        std::clog << "Email : " << msg << std::endl;
+    }
+};
+
+class WhatsApp : public IMessageSender
+{
+public:
+    void send(std::string_view msg) override
+    {
+        std::clog << "WhatsApp : " << msg << std::endl;
+    }
+};
+
+class Notification
+{
+    std::unique_ptr<IMessageSender> sender{};
+
+public:
+    Notification(std::unique_ptr<IMessageSender> sender_) : sender(std::move(sender_)) {}
+    void send(std::string_view msg)
+    {
+        sender->send(msg);
+    };
+};
+
 int main()
 {
     // 1. SRP
@@ -201,6 +242,15 @@ int main()
     // Scan(std::move(std::make_unique<SimplePrinter>())); //compile error
     Print(std::move(std::make_unique<SmartPrinter>()));
     Scan(std::move(std::make_unique<SmartPrinter>()));
+
+    // 5. DIP
+    std::clog << "5. DIP" << std::endl;
+
+    auto email = std::make_unique<Notification>(std::move(std::make_unique<Email>()));
+    email->send("Hello email");
+
+    auto whatsapp = std::make_unique<Notification>(std::move(std::make_unique<WhatsApp>()));
+    whatsapp->send("Hello whatsapp");
 
     return 0;
 }
