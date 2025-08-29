@@ -1,0 +1,44 @@
+Behavioral Design Pattern
+    visitor design pattern
+---------------------------------
+
+### 📚 **Library with different media**
+
+Imagine a **library** that has:
+
+* **Books** 
+* **Magazines** 
+* **DVDs** 
+
+Each item is part of the library collection.
+
+Now, there are different kinds of **operations (visitors)** that can be applied to these items:
+
+* **Librarian** → checks them in/out.
+* **Cataloguer** → records metadata for the item.
+* **Repair staff** → fixes damaged items.
+
+---
+
+### How it maps
+
+* **Library items (Book, Magazine, DVD)** → *Elements being visited*.
+* **Visitors (Librarian, Cataloguer, Repair staff)** → *Visitors performing different operations*.
+* Each item has an `accept(visitor)` method → it tells the visitor: *"You know what to do with me."*
+
+This way:
+
+* If the library introduces a **new operation** (say, *Digital Archivist*), you just add a new visitor class.
+* You **don’t modify** `Book`, `Magazine`, or `DVD`.
+
+---
+
+### Key point
+
+Visitor is useful when:
+
+* You have a **stable set of object types** (like Book, Magazine, DVD).
+* You need to perform **new operations frequently** (checking out, cataloging, repairing, archiving…).
+
+---
+
