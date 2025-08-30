@@ -1,14 +1,28 @@
-#version
+# Minimum CMake version
 cmake_minimum_required(VERSION 4.0)
 
-#project name
+# Project name
 project(test)
 
-#set cpp
+# Set C++ standard
 set(CMAKE_CXX_STANDARD 17)
+set(CMAKE_CXX_STANDARD_REQUIRED ON)
+set(CMAKE_CXX_EXTENSIONS OFF)
 
-#set source
-set(SOURCES main.cpp)
+# Header files
+set(HEADERS
+    library_fwd.hpp
+    library.hpp
+    visitor.hpp
+    books.hpp
+    magazine.hpp
+    concrete_visitors.hpp
+)
 
-#add executable
-add_executable(test ${SOURCES})
+# Source files
+set(SOURCES
+    main.cpp
+)
+
+# Add executable
+add_executable(${PROJECT_NAME} ${SOURCES} ${HEADERS})
