@@ -59,13 +59,13 @@ public:
     }
 };
 
-void LibActivity(Library &lib, Visitor &v)
+void LibVisit(Library &lib, Visitor &v)
 {
     lib.accept(v);
 }
 
 // smart ptr
-void LibActivity(std::shared_ptr<Library> lib, std::unique_ptr<Visitor> v)
+void LibVisit(std::shared_ptr<Library> lib, std::unique_ptr<Visitor> v)
 {
     lib->accept(*v);
 }
@@ -74,7 +74,7 @@ int main()
 {
     BookLibrary lib;
     Student st(123, "C++", "Issue"); //visitor
-    LibActivity(lib, st);
+    LibVisit(lib, st);
 
     // smart ptr
     auto libPtr = std::make_shared<BookLibrary>();
@@ -84,9 +84,9 @@ int main()
     auto stPtr2 = std::make_unique<Student>(567, "Java", "Issue");
     auto bookrepair = std::make_unique<BookRepair>("C++");
 
-    LibActivity(libPtr, std::move(stPtr));
-    LibActivity(libPtr, std::move(stPtr2));
-    LibActivity(libPtr, std::move(bookrepair));
+    LibVisit(libPtr, std::move(stPtr));
+    LibVisit(libPtr, std::move(stPtr2));
+    LibVisit(libPtr, std::move(bookrepair));
 
     return 0;
 }
