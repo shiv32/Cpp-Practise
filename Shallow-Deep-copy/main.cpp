@@ -43,10 +43,18 @@ public:
     {
         std::clog << "Data: " << buffer << std::endl;
     }
+
+    ~Data()
+    {
+        delete[] buffer;
+    }
 };
 
 int main(int argc, char *agrv[])
 {
+    system("clear && printf '\e[3J'"); // clean the terminal before output in linux
+
+    // stack object (auto lifetime).
     Data original("Hello shiv.");
     Data shallowCopy(original, true);
     auto deepCopy = original.clone();
@@ -56,18 +64,20 @@ int main(int argc, char *agrv[])
     deepCopy->print();
 
     //------------------
-    auto original2 = std::make_unique<Data>("Hello Shiv2");
-    auto shallowCopy2 = std::make_unique<Data>(*original2, true);
-    shallowCopy2->print();
-    original2.reset();
-    shallowCopy2->print();
+    // auto original2 = std::make_unique<Data>("Hello Shiv2");  //in stack --> heap
+    // auto shallowCopy2 = std::make_unique<Data>(*original2, true); //in stack --> heap
+
+    // original2->print();
+    // shallowCopy2->print();
 
     //---------------------
-    Data *original3 = new Data("Hello shiv3");
-    Data shallowCopy3(*original3, true);
-    shallowCopy3.print();
-    delete original3;
-    shallowCopy3.print();
+    // Data *original3 = new Data("Hello shiv3"); //in stack --> heap
+    // Data shallowCopy3(*original3, true); //in stack --> heap
+
+    // shallowCopy3.print();
+
+    // delete original3;
+    // original3 = nullptr;
 
     return 0;
 }
