@@ -52,7 +52,53 @@ int main(int argc, char *argv[])
         obj3->greet();
     }
 
+    std::clog << "---------------------" << std::endl;
+
+    // 3. share pointer
+    {
+        std::shared_ptr<Demo> sp1 = std::make_shared<Demo>("spObject1");
+
+        std::clog << "sp1 count1 : " << sp1.use_count() << std::endl;
+
+        {
+            std::shared_ptr<Demo> sp2 = sp1; // increase ref count
+
+            std::clog << "sp1 count2 : " << sp1.use_count() << std::endl;
+
+            sp2->greet();
+        } // decrese ref count
+
+        std::clog << "sp1 count3 : " << sp1.use_count() << std::endl;
+    } // sp1 will destroy
+
+    std::clog << "---------------------" << std::endl;
+
+    // 3. weak pointer
+    {
+        std::shared_ptr<Demo> sp = std::make_shared<Demo>("spObject");
+
+        std::clog << "sp count1 : " << sp.use_count() << std::endl;
+
+        std::weak_ptr<Demo> wp = sp; // ref count wil not increase
+
+        std::clog << "sp count2 : " << sp.use_count() << std::endl;
+
+        // sp.reset();
+
+        if (auto sharePtr = wp.lock()) // lock create share pointer if alive
+        {
+            sharePtr->greet();
+        }
+
+        sp.reset();
+
+        if (wp.expired())
+        {
+            std::clog << "sp destroyed." << std::endl;
+        }
+    }
+
     std::clog << "main exit." << std::endl;
-    
+
     return 0;
 }
