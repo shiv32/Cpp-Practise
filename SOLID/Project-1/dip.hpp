@@ -36,6 +36,7 @@ class Notification
 
 public:
     Notification(std::unique_ptr<IMessageSender> sender_) : sender(std::move(sender_)) {}
+    
     void send(std::string_view msg)
     {
         sender->send(msg);

@@ -1,1 +1,6 @@
-SOLID
+SOLID Principles
+    SRP(Single Responsibility Principle)    – InvoiceData handles data; InvoicePrinter handles printing.
+    OCP(Open-Closed Principle)              – New shapes can be added without modifying totalArea.
+    LSP(Liskov Substitution Principle)      – Sparrow can replace Bird.
+    ISP(Interface Segregation Principle)    – Separate small interfaces (printer vs scanner).
+    DIP(Dependency Inversion Principle)     – Notification depends on IMessageSender, not a concrete sender.

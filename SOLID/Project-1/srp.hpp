@@ -16,20 +16,20 @@ public:
         data.push_back(item.data());
     }
 
-    void print()
+    std::vector<std::string> getItem()
     {
-        for (const auto &item : data)
-        {
-            std::clog << item << "\n";
-        }
+        return data;
     }
 };
 
 class InvoicePrint
 {
 public:
-    static void print(std::unique_ptr<InvoiceData> data)
+    static void print(std::unique_ptr<InvoiceData> invoiceData)
     {
-        data->print();
+        for (const auto &item : invoiceData->getItem())
+        {
+            std::clog << item << "\n";
+        }
     }
 };
