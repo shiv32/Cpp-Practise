@@ -21,8 +21,14 @@ public:
 
 int main()
 {
-    Singleton::instance().logger("main 1 call ");
-    Singleton::instance().logger("main 2 call ");
+    {
+        Singleton::instance().logger("main 1 call ");
+    }
+
+    {
+        Singleton::instance().logger("main 2 call ");
+    }
+
     Singleton::instance().logger("main 3 call ");
     Singleton::instance().logger("main 4 call ");
 
