@@ -8,7 +8,7 @@ project(test)
 set(CMAKE_CXX_STANDARD 17)
 
 #set source
-set(SOURCES main.cpp)
+set(SOURCES main2.cpp)
 
 #add exe
 add_executable(test ${SOURCES})

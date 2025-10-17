@@ -3,26 +3,47 @@
 
 class House
 {
+    std::string m_wall{}, m_roof{};
+
 public:
-    std::string wall, roof;
-    void show() { std::clog << "House with " << wall << " wall and " << roof << " roof." << std::endl; }
+    const std::string &getWall()
+    {
+        return m_wall;
+    }
+
+    void setWall(std::string_view wall)
+    {
+        m_wall = wall.data();
+    }
+
+    const std::string &getRoof()
+    {
+        return m_roof;
+    }
+
+    void setRoof(std::string_view roof)
+    {
+        m_roof = roof.data();
+    }
+
+    void show() { std::clog << "House with " << getWall() << " wall and " << getRoof() << " roof." << std::endl; }
 };
 
 class HouseBuilder
 {
+    std::shared_ptr<House> house{};
+
 public:
-    std::unique_ptr<House> house{};
-
-    HouseBuilder() : house(std::make_unique<House>()) {
-
-                     };
+    HouseBuilder() : house(std::make_shared<House>()) 
+    {
+    };
 
     virtual HouseBuilder &buildWall() = 0;
     virtual HouseBuilder &buildRoof() = 0;
 
-    std::unique_ptr<House> getHouse()
+    std::shared_ptr<House> getHouse()
     {
-        return std::move(house);
+        return house;
     }
 
     virtual ~HouseBuilder() = default;
@@ -33,13 +54,13 @@ class WoodenHouse final : public HouseBuilder
 public:
     HouseBuilder &buildWall() override
     {
-        house->wall = "wooden";
+        getHouse()->setWall("wooden");
         return *this;
     }
 
     HouseBuilder &buildRoof() override
     {
-        house->roof = "wooden";
+        getHouse()->setRoof("wooden");
         return *this;
     }
 };
@@ -49,13 +70,13 @@ class StoneHouse final : public HouseBuilder
 public:
     HouseBuilder &buildWall() override
     {
-        house->wall = "Stone";
+        getHouse()->setWall("Stone");
         return *this;
     }
 
     HouseBuilder &buildRoof() override
     {
-        house->roof = "Stone";
+        getHouse()->setRoof("Stone");
         return *this;
     }
 };
@@ -63,9 +84,9 @@ public:
 class Engineer
 {
 public:
-    std::unique_ptr<House> construct(std::unique_ptr<HouseBuilder> hb)
+    std::shared_ptr<House> construct(std::unique_ptr<HouseBuilder> hb)
     {
-        return std::move(hb->buildWall().buildRoof().getHouse());
+        return hb->buildWall().buildRoof().getHouse();
     }
 };
 
@@ -82,10 +103,10 @@ int main()
     auto sh = std::make_unique<StoneHouse>();
 
     Engineer en;
-    
+
     // HouseEnum hs = HouseEnum::CEMENT;
-    // HouseEnum hs = HouseEnum::STONE;
-    HouseEnum hs = HouseEnum::WOOD;
+    HouseEnum hs = HouseEnum::STONE;
+    // HouseEnum hs = HouseEnum::WOOD;
 
     switch (hs)
     {
