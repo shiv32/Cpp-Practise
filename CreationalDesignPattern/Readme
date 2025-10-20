@@ -1,4 +1,4 @@
-Creational design pattern
+Creational design pattern (5)
 
         Singleton           – Ensures only one instance.
         Factory Method      – Subclass decides which product to create.
