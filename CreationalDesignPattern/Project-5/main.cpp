@@ -36,7 +36,7 @@ int main()
     auto cloneCr = cr.clone();
     cloneCr->draw();
 
-    //its deep copy address will different
+    //its deep copy address will be different
     std::clog << "cr address : " << &cr << std::endl;
     std::clog << "cloneCr address : " << &cloneCr << std::endl;
 
