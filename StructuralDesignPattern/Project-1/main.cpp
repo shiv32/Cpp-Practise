@@ -45,14 +45,11 @@ public:
 
 int main()
 {
-
-    RealImage ri("shiv.png");
-    ri.display();
-    ri.display();
+    //RealImage ri("shiv.png"); // Loading
+    //ri.display(); // Display
 
     ProxyImage pi("shiv2.png");
-    pi.display(); // load
-    pi.display(); // cache
+    pi.display(); // Loading && Display
 
     return 0;
 }
