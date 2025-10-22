@@ -7,7 +7,11 @@ class Glyph
     char symbol;
 
 public:
-    Glyph(char c) : symbol(c) {};
+    Glyph(char c) : symbol(c) 
+    {
+
+    };
+    
     void draw(int x, int y)
     {
         std::cout << "drawing " << symbol << " at (" << x << "," << y << ")" << std::endl;
