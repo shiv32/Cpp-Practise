@@ -23,10 +23,12 @@ class BorderDecoration final : public Widget
 
 public:
     BorderDecoration(std::unique_ptr<Widget> wd) : wid(std::move(wd)) {}
+
     void draw() override
     {
+        std::clog << "-------------" << std::endl;
         wid->draw();
-        std::clog << "  Border" << std::endl;
+        std::clog << "-------------" << std::endl;
     }
 };
 
