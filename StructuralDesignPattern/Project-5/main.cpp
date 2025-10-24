@@ -40,6 +40,7 @@ public:
     void draw() override
     {
         std::clog << "Canvas : " << std::endl;
+
         for (const auto &g : graphic)
         {
             g->draw();
@@ -49,8 +50,11 @@ public:
 
 int main()
 {
+    // leaf
     auto line = std::make_unique<Line>();
     auto circle = std::make_unique<Circle>();
+
+    // container
     auto canvas = std::make_unique<Canvas>();
 
     canvas->add(std::move(line));
