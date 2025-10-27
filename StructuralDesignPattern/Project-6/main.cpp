@@ -33,7 +33,11 @@ protected:
     std::unique_ptr<DrawingApi> dapi;
 
 public:
-    Shape(std::unique_ptr<DrawingApi> da) : dapi(std::move(da)) {}
+    Shape(std::unique_ptr<DrawingApi> da) : dapi(std::move(da)) 
+    {
+
+    }
+    
     virtual void draw() = 0;
     virtual ~Shape() = default;
 };
