@@ -57,9 +57,11 @@ int main()
     // ctx.request();
 
     // smart ptr
-    auto ctx2 = std::make_unique<Context>(std::make_unique<StateA>());
-    ctx2->request();
-    ctx2->request();
+    auto ctx2 = std::make_unique<Context>(std::make_unique<StateA>());// start state A
+
+    ctx2->request();  // A -> B
+    ctx2->request();  // B -> A
+    ctx2->request();  // A -> B
 
     return 0;
 }
