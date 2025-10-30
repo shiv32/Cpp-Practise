@@ -54,11 +54,11 @@ int main()
     auto coffee = std::make_unique<Coffee>();
     auto tea = std::make_unique<Tea>();
 
-    // prepare coffee
     std::clog << "Prepare Coffee : " << "\n";
     coffee->prepareBeverage();
 
-    // prepare tea
+    std::clog << "\n";
+
     std::clog << "Prepare Tea : " << "\n";
     tea->prepareBeverage();
 
