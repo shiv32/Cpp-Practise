@@ -18,8 +18,16 @@ class Context
 
 public:
     Context(std::unique_ptr<State> st) : state(std::move(st)) {}
-    void setState(std::unique_ptr<State> st) { state = std::move(st); }
-    void request() { state->handle(*this); }
+    
+    void setState(std::unique_ptr<State> st) 
+    { 
+        state = std::move(st); 
+    }
+
+    void request() 
+    { 
+        state->handle(*this); 
+    }
 };
 
 //-------- states ----------------------
