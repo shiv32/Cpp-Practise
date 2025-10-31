@@ -17,6 +17,7 @@ public:
     ConcreretObserver(std::string name_) : name(std::move(name_))
     {
     }
+    
     void update(int value) override
     {
         std::clog << name << " oberver got " << value << std::endl;

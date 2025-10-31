@@ -51,6 +51,7 @@ int main()
 {
     auto conHandle1 = std::make_unique<ConcreteHandler>(30);
     auto conHandle2 = std::make_unique<ConcreteHandler>(70);
+    
     conHandle1->setHandler(std::move(conHandle2));
 
     conHandle1->handle(20);
