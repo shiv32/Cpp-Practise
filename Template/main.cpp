@@ -17,6 +17,7 @@ class Box // primary template class
 
 public:
     Box(T value) : value_(value) {}
+
     void show()
     {
         std::clog << "value : " << value_ << std::endl;
@@ -31,6 +32,7 @@ class Box<std::string> // full specialization class for string
 
 public:
     Box(std::string value) : value_(value) {}
+
     void show()
     {
         std::clog << "string value : " << value_ << std::endl;
@@ -53,7 +55,7 @@ public:
     {
         for (int i = 0; i < size; ++i)
         {
-            std::clog << "value : " << data[i]<<", ";
+            std::clog << "value : " << data[i] << ", ";
         }
 
         // for (auto const value_ : data)
@@ -66,11 +68,27 @@ public:
 };
 
 // 5. template with auto (C++ 17 deduction guide)
-template<typename T1, typename T2>
+template <typename T1, typename T2>
 auto multiply(T1 first, T2 second)
 {
-     return first*second;
+    return first * second;
 }
+
+// 6. variadic template --------------------
+// base case
+template <typename T>
+void print(const T &value)
+{
+    std::clog << value << std::endl;
+}
+
+template <typename First, typename... Arg>
+void print(const First &first, const Arg&... arg)
+{
+    std::clog << first << std::endl;
+    print(arg...);
+}
+//-------------------------------------------
 
 int main()
 {
@@ -106,11 +124,14 @@ int main()
 
     array.print();
 
-    std::cout<<"--------------"<<std::endl;
+    std::cout << "--------------" << std::endl;
 
-    //5. template with auto
-    std::clog<<"mutltiply : "<<multiply(3, 6.4)<<std::endl;
-    std::clog<<"mutltiply : "<<multiply(4.5, 6)<<std::endl;
+    // 5. template with auto
+    std::clog << "mutltiply : " << multiply(3, 6.4) << std::endl;
+    std::clog << "mutltiply : " << multiply(4.5, 6) << std::endl;
+
+    // 6. variadic template
+    print(1, 2, "shiv", 4.5);
 
     return 0;
 }
