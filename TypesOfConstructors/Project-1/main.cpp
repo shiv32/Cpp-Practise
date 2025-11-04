@@ -61,20 +61,20 @@ int main()
     // Test a;
 
     // parameter
-    Test a1(5);
+    //Test a1(5);
 
     // copy
-    Test a2 = a1;
+    //Test a2 = a1;
 
     // move
-    Test a3 = std::move(a2);
+    //Test a3 = std::move(a2);
 
     // delegate
     // Test(5.9);
 
     // explicit
-    // Test a4('b');       X
-    // Test a4 = 'b';
+    //Test a4('b');       //call explicit ctor
+    //Test a4 = 'b';     //call implicit ctor
 
     // delete
     // Test("shiv");
