@@ -14,29 +14,34 @@ namespace rawPtr
     public:
         Persion(const char *mname)
         {
+            TRACE;
+
             name = new char[strlen(mname) + 1];
             strcpy(name, mname);
-            std::clog << __PRETTY_FUNCTION__ << std::endl;
         }
 
         // dtor
         ~Persion()
         {
+            TRACE;
+
             delete[] name;
-            std::clog << __PRETTY_FUNCTION__ << std::endl;
         }
 
         // copy ctor
         Persion(const Persion &other)
         {
+            TRACE;
+
             name = new char[strlen(other.name) + 1];
             strcpy(name, other.name);
-            std::clog << __PRETTY_FUNCTION__ << std::endl;
         }
 
         // copy assingment
         Persion &operator=(const Persion &other)
         {
+            TRACE;
+
             if (this != &other)
             {
                 delete[] name;
@@ -44,28 +49,30 @@ namespace rawPtr
                 strcpy(name, other.name);
             }
 
-            std::clog << __PRETTY_FUNCTION__ << std::endl;
             return *this;
         }
 
         // move ctor
         Persion(Persion &&other) noexcept
         {
+            TRACE;
+
             name = other.name;
             other.name = nullptr;
-            std::clog << __PRETTY_FUNCTION__ << std::endl;
         }
 
         // move assignment
         Persion &operator=(Persion &&other) noexcept
         {
+            TRACE;
+
             if (this != &other)
             {
                 delete[] name;
                 name = other.name;
                 other.name = nullptr;
             }
-            std::clog << __PRETTY_FUNCTION__ << std::endl;
+
             return *this;
         }
 
@@ -101,11 +108,13 @@ namespace smartPtr
 
         Persion &operator=(const Persion &other)
         {
+            TRACE;
+
             if (this != &other)
             {
                 name = std::make_unique<std::string>(*other.name);
             }
-            TRACE;
+
             return *this;
         }
 
@@ -121,8 +130,8 @@ namespace smartPtr
 
 int main()
 {
-    //using namespace rawPtr;
-    using namespace smartPtr;
+    using namespace rawPtr;
+    // using namespace smartPtr;
 
     Persion a("shiv");
     Persion b = a;            // copy ctor
