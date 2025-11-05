@@ -42,10 +42,10 @@ int main(int argc, char *argv[])
     // 2. unique pointer custom deleter
     {
         auto deleter = [](Demo *p)
-        {
-            std::clog << "Custom deleter called." << std::endl;
-            delete p;
-        };
+                                    {
+                                        std::clog << "Custom deleter called." << std::endl;
+                                        delete p;
+                                    };
 
         std::unique_ptr<Demo, decltype(deleter)> obj3(new Demo("obj3"), deleter);
 
