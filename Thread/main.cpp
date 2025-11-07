@@ -3,6 +3,7 @@
 #include <chrono>
 #include <vector>
 #include <memory>
+#include <mutex>
 
 // 1. function with no paramter
 void helloThread()
@@ -38,11 +39,11 @@ public:
 
     void doWork(int iteration)
     {
-       for(int i{}; i<iteration; ++i)
-       {
-          std::clog<<name_<<" working "<<i<<std::endl;
-          std::this_thread::sleep_for(std::chrono::milliseconds(500));
-       }
+        for (int i{}; i < iteration; ++i)
+        {
+            std::clog << name_ << " working " << i << std::endl;
+            std::this_thread::sleep_for(std::chrono::milliseconds(500));
+        }
     }
 
 private:
@@ -51,12 +52,26 @@ private:
 
 struct Task
 {
-    void operator() (int taskNo)
+    void operator()(int taskNo)
     {
-       std::clog<<"Task #"<<taskNo<<" running.."<<std::endl;
-       std::this_thread::sleep_for(std::chrono::milliseconds(500));
+        std::clog << "Task #" << taskNo << " running.." << std::endl;
+        std::this_thread::sleep_for(std::chrono::milliseconds(500));
     }
 };
+
+//---------------------------
+int counterShared{}; // shared resource
+std::mutex mtx;      // mutex to protect it
+
+void safeIncrement()
+{
+    for (int i = 0; i < 1000; ++i)
+    {
+        std::lock_guard<std::mutex> lock(mtx); // auto-lock and unlock
+        ++counterShared;                       // critical section
+    }
+}
+//---------------------------
 
 int main(int argc, char *argv[])
 {
@@ -106,16 +121,26 @@ int main(int argc, char *argv[])
     std::this_thread::sleep_for(std::chrono::seconds(2)); // main thread
     //--------------------------------------------------
 
-    //6. member function ptr -------------------------------
+    // 6. member function ptr -------------------------------
     auto worker = std::make_shared<Worker>("Thread-A");
     std::thread t5(&Worker::doWork, worker, 4);
     t5.join();
     //-------------------------------------------------------
 
-    //7. function object or functor ------------------------------------
+    // 7. function object or functor ------------------------------------
     std::thread t6(Task{}, 8);
     t6.join();
     //--------------------------------------------------------
+
+    // 8. Race condition avoid ---------------------------
+    std::thread t7(safeIncrement);
+    std::thread t8(safeIncrement);
+
+    t7.join();
+    t8.join();
+
+    std::cout << "Final counter value: " << counterShared << '\n';
+    //----------------------------------------------------
 
     std::clog << "main thread exit." << std::endl;
 
