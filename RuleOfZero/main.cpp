@@ -18,8 +18,8 @@ public:
 int main(int argc, char *argv[])
 {
     auto personA = std::make_shared<Person>("shiv");
-    auto personB = personA;
-    auto personC = std::move(personA);
+    auto personB = personA; // copy ctor
+    auto personC = std::move(personA); // move ctor
 
     personB->greet();
     personC->greet();
