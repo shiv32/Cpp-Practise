@@ -45,6 +45,7 @@ public:
 double totalArea(const std::vector<std::unique_ptr<Shape>> &shape)
 {
     double sum = 0;
+    
     for (const auto &item : shape)
     {
         sum += item->area();
