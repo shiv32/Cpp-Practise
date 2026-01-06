@@ -24,9 +24,9 @@ public:
     }
 };
 
-// 3. template spcialization
+// 3. template spcialization, full specialization class for string
 template <>
-class Box<std::string> // full specialization class for string
+class Box<std::string>
 {
     std::string value_;
 
@@ -36,6 +36,21 @@ public:
     void show()
     {
         std::clog << "string value : " << value_ << std::endl;
+    }
+};
+
+// 3.1 template spcialization, partial specialization
+template <typename T>
+class Box<const T>
+{
+    const T value_;
+
+public:
+    Box(const T &value) : value_(value) {}
+
+    void show()
+    {
+        std::clog << "const value : " << value_ << std::endl;
     }
 };
 
@@ -79,11 +94,11 @@ auto multiply(T1 first, T2 second)
 template <typename T>
 void print(const T &value)
 {
-    std::clog << value << std::endl;
+    std::clog << "Base: " << value << std::endl;
 }
 
 template <typename First, typename... Arg>
-void print(const First &first, const Arg&... arg)
+void print(const First &first, const Arg &...arg)
 {
     std::clog << first << std::endl;
     print(arg...);
@@ -107,10 +122,17 @@ int main()
 
     std::cout << "----------" << std::endl;
 
-    // 3. specialization
+    // 3. full specialization
     // if specialization available then it will use it, otherewise primary template class will be used
-    auto stringBox = std::make_unique<Box<std::string>>("shiv");
+    auto stringBox = std::make_unique<Box<std::string>>("shiv"); // string full specialization
     stringBox->show();
+
+    std::cout << "-----------" << std::endl;
+
+    // 3.1 partial specialization
+    // if specialization available then it will use it, otherewise primary template class will be used
+    auto constIntBox = std::make_unique<Box<const int>>(30); // const partial specialization
+    constIntBox->show();
 
     std::cout << "-----------" << std::endl;
 
