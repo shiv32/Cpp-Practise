@@ -11,7 +11,7 @@ struct Test
         std::clog << __PRETTY_FUNCTION__ << std::endl;
     }
 
-    // parameter
+    // parameter, implicit
     Test(int ix) : x(ix)
     {
         std::clog << __PRETTY_FUNCTION__ << std::endl;
@@ -60,7 +60,7 @@ int main()
     // default
     // Test a;
 
-    // parameter
+    // parameter, implicit
     //Test a1(5);
 
     // copy
