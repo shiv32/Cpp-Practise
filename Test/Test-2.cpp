@@ -3,6 +3,8 @@
 #include <memory>
 #include <algorithm>
 
+using namespace std;
+
 /*
 1. Single responsibility principle
 */
@@ -39,3 +41,18 @@ public:
         }
     }
 };
+
+int main(int argc, char *argv[])
+{
+    auto id = make_unique<InvoiceData>();
+
+    id->addItem("ob1");
+    id->addItem("ob2");
+    id->addItem("ob3");
+    id->removeItem("ob2");
+
+    InvoicePrint ip;
+    ip.print(move(id));
+
+    return EXIT_SUCCESS;
+}
