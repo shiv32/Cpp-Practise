@@ -2,7 +2,7 @@
 Covered (actual useful subset)
 
 Containers (practical ones)  
-    &nbsp;Indented vector          → default choice  
+    &nbsp; vector          → default choice  
     deque           → double-ended  
     list            → rare but shows non-random iterator  
     set / map       → ordered  
