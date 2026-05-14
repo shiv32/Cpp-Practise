@@ -28,6 +28,6 @@ Straight truth (important for you as C++ dev)
     &nbsp;&nbsp; You don’t need “all STL”.  
     &nbsp;&nbsp; If you deeply understand just:  
 
-        &nbsp;&nbsp; vector + sort + find + transform + accumulate  
+        vector + sort + find + transform + accumulate  
 
-    &nbsp;&nbsp; you’re already ahead of most developers.  
+    you’re already ahead of most developers.  
