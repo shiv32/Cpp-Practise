@@ -26,6 +26,7 @@ namespace rawPtr
             TRACE;
 
             delete[] name;
+            name = nullptr;
         }
 
         // copy ctor
@@ -42,7 +43,7 @@ namespace rawPtr
         {
             TRACE;
 
-            if (this != &other)
+            if (this != &other) //checking self assignment
             {
                 delete[] name;
                 name = new char[strlen(other.name) + 1];
@@ -66,7 +67,7 @@ namespace rawPtr
         {
             TRACE;
 
-            if (this != &other)
+            if (this != &other) //checking self assignment
             {
                 delete[] name;
                 name = other.name;
