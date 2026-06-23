@@ -4,32 +4,36 @@
 /*
 3. LSP- liskov substituion principle
 */
-class Bird
-{
-public:
-    virtual void fly() { std::clog << "flying" << "\n"; };
-    virtual ~Bird() = default;
-};
 
-class Sparrow : public Bird
+namespace lsp
 {
-public:
-    void fly() override
+    class Bird
     {
-        std::clog << "Sparrow flying" << "\n";
-    }
-};
+    public:
+        virtual void fly() { std::clog << "flying" << "\n"; };
+        virtual ~Bird() = default;
+    };
 
-class Crow : public Bird
-{
-public:
-    void fly() override
+    class Sparrow : public Bird
     {
-        std::clog << "Crow flying" << "\n";
-    }
-};
+    public:
+        void fly() override
+        {
+            std::clog << "Sparrow flying" << "\n";
+        }
+    };
 
-void BirdFly(std::unique_ptr<Bird> bird)
-{
-    bird->fly();
+    class Crow : public Bird
+    {
+    public:
+        void fly() override
+        {
+            std::clog << "Crow flying" << "\n";
+        }
+    };
+
+    void BirdFly(std::unique_ptr<Bird> bird)
+    {
+        bird->fly();
+    }
 }

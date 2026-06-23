@@ -4,52 +4,54 @@
 /*
 2. Open close principle
 */
-
-class Shape
+namespace ocp
 {
-public:
-    virtual double area() = 0;
-    virtual ~Shape() = default;
-};
-
-class Circle : public Shape
-{
-    double radius{};
-
-public:
-    Circle(double r) : radius(r)
+    class Shape
     {
-    }
+    public:
+        virtual double area() = 0;
+        virtual ~Shape() = default;
+    };
 
-    double area() override
+    class Circle : public Shape
     {
-        return 3.14 * radius * radius;
-    }
-};
+        double radius{};
 
-class Rectangle : public Shape
-{
-    double length, width;
+    public:
+        Circle(double r) : radius(r)
+        {
+        }
 
-public:
-    Rectangle(double l, double w) : length(l), width(w)
+        double area() override
+        {
+            return 3.14 * radius * radius;
+        }
+    };
+
+    class Rectangle : public Shape
     {
-    }
+        double length, width;
 
-    double area() override
+    public:
+        Rectangle(double l, double w) : length(l), width(w)
+        {
+        }
+
+        double area() override
+        {
+            return length * width;
+        }
+    };
+
+    double totalArea(const std::vector<std::unique_ptr<Shape>> &shape)
     {
-        return length * width;
-    }
-};
+        double sum = 0;
 
-double totalArea(const std::vector<std::unique_ptr<Shape>> &shape)
-{
-    double sum = 0;
-    
-    for (const auto &item : shape)
-    {
-        sum += item->area();
-    }
+        for (const auto &item : shape)
+        {
+            sum += item->area();
+        }
 
-    return sum;
+        return sum;
+    }
 }

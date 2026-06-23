@@ -6,36 +6,40 @@
 /*
 1. Single responsibility principle
 */
-class InvoiceData
+
+namespace srp
 {
-private:
-    std::vector<std::string> data;
-
-public:
-    void addItem(std::string_view item)
+    class InvoiceData
     {
-        data.push_back(item.data());
-    }
+    private:
+        std::vector<std::string> data;
 
-    void removeItem(std::string_view item)
-    {
-        data.erase(std::remove(data.begin(), data.end(), item.data()), data.end());
-    }
-
-    std::vector<std::string> getItem()
-    {
-        return data;
-    }
-};
-
-class InvoicePrint
-{
-public:
-    static void print(std::unique_ptr<InvoiceData> invoiceData)
-    {
-        for (const auto &item : invoiceData->getItem())
+    public:
+        void addItem(std::string_view item)
         {
-            std::clog << item << "\n";
+            data.push_back(item.data());
         }
-    }
-};
+
+        void removeItem(std::string_view item)
+        {
+            data.erase(std::remove(data.begin(), data.end(), item.data()), data.end());
+        }
+
+        std::vector<std::string> getItems()
+        {
+            return data;
+        }
+    };
+
+    class InvoicePrint
+    {
+    public:
+        static void print(std::unique_ptr<InvoiceData> invoiceData)
+        {
+            for (const auto &item : invoiceData->getItems())
+            {
+                std::clog << item << "\n";
+            }
+        }
+    };
+}
