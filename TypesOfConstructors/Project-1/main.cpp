@@ -30,7 +30,7 @@ struct Test
         std::clog << __PRETTY_FUNCTION__ << std::endl;
     }
 
-    // delegate
+    // delegate, call another ctor from one
     Test(double d) : Test(static_cast<int>(d))
     {
         std::clog << __PRETTY_FUNCTION__ << std::endl;
@@ -74,7 +74,7 @@ int main()
 
     // explicit
     //Test a4('b');       //call explicit ctor
-    //Test a4 = 'b';     //call implicit ctor
+    //Test a4 = 'b';     //call implicit ctor, compiler handle it
 
     // delete
     // Test("shiv");
