@@ -26,12 +26,17 @@ namespace shallow
         {
             data = other.data;
         }
+
+        ~Demo()
+        {
+            delete data;
+        }
     };
 }
 
 namespace deep
 {
-    /* 
+    /*
         Copies actual value into new memory.
         Each object has separate memory.
     */
@@ -63,24 +68,24 @@ int main()
     system("clear && printf '\e[3J'"); // clean the terminal before output in linux
 
     // shallow
-    // using namespace shallow;
-
-    // Demo a(10);
-    // Demo b = a;
-
-    // *b.data = 50;
-
-    // cout << *a.data << endl; // 50
-    // cout << *b.data << endl; // 50
-
-    // deep-------------------------------------
-     using namespace deep;
+    using namespace shallow;
 
     Demo a(10);
     Demo b = a;
 
     *b.data = 50;
 
-    cout << *a.data << endl; // 10
+    cout << *a.data << endl; // 50
     cout << *b.data << endl; // 50
+
+    // deep-------------------------------------
+    // using namespace deep;
+
+    // Demo a(10);
+    // Demo b = a;
+
+    // *b.data = 50;
+
+    // cout << *a.data << endl; // 10
+    // cout << *b.data << endl; // 50
 }
