@@ -149,8 +149,9 @@ int main()
     std::cout << "--------------" << std::endl;
 
     // 5. template with auto
-    std::clog << "mutltiply : " << multiply(3, 6.4) << std::endl;
-    std::clog << "mutltiply : " << multiply(4.5, 6) << std::endl;
+    std::clog << "mutltiply : " << multiply(3, 6.4) << std::endl; //output: 19.2
+    std::clog << "mutltiply : " << multiply(6.4, 3) << std::endl; //output: 19.2
+    std::clog << "mutltiply : " << multiply(4.5, 6) << std::endl; //output: 27
 
     // 6. variadic template
     print(1, 2, "shiv", 4.5);
