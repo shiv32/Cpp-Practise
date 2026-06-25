@@ -1,7 +1,7 @@
 Creational design pattern (5)
 
         Singleton           – Ensures only one instance.
-        Factory Method      – Subclass decides which product to create.
+        Factory Method      – Subclass(Creator) decides which product to create.
         Abstract Factory    – Produces families of related objects.
         Builder             – Step-by-step construction of complex objects.
         Prototype           – Cloning existing objects.
